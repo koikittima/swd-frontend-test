@@ -14,9 +14,25 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store";
-import { updateFormData } from "@/features/form/form-slice";
+import { setFormData } from "@/features/form/form-slice";
 import styles from "@/app/page.module.css";
 const { Option } = Select;
+
+interface FormValues {
+  title: string;
+  first_name: string;
+  last_name: string;
+  birth_day: string | null;
+  nationality: string;
+  citizen: string;
+  gender: string;
+  mobile_phone: {
+    country_code: string;
+    number: string;
+  };
+  passport_no: string;
+  expected_salary: number | "";
+}
 
 const titleOptions = [
   { value: "mr", label: "Mr." },
@@ -44,22 +60,21 @@ const FormTableComponent = () => {
   const formData = useSelector((state: RootState) => state.form);
   const [form] = Form.useForm();
 
-  const handleValuesChange = (changedValues: any, allValues: any) => {
-    console.log("allValues", allValues);
-    dispatch(updateFormData(allValues));
+  const handleValuesChange = (changedValues: Partial<FormValues>, allValues: FormValues) => {
+    dispatch(setFormData(allValues));
   };
 
   const handleCitizenChange = (value: string, index: number) => {
-    let newCitizen = formData.citizen.split("");
-    let segmentLengths = [1, 4, 5, 2, 1];
+    const newCitizen = formData.citizen.split("");
+    const segmentLengths = [1, 4, 5, 2, 1];
 
-    let startIdx = segmentLengths.slice(0, index).reduce((a, b) => a + b, 0);
+    const startIdx = segmentLengths.slice(0, index).reduce((a, b) => a + b, 0);
     newCitizen.splice(startIdx, segmentLengths[index], ...value.split(""));
 
-    let updatedCitizen = newCitizen.join("");
+  const updatedCitizen = newCitizen.join("");
 
     form.setFieldsValue({ citizen: updatedCitizen });
-    dispatch(updateFormData({ citizen: updatedCitizen }));
+    dispatch(setFormData({ citizen: updatedCitizen }));
   };
 
   return (
