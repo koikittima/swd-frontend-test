@@ -9,14 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.1",
+    "@types/uuid": "^10.0.0",
     "antd": "^5.20.6",
-    "i18next": "^23.15.1",
+    "i18next": "^23.16.8",
     "next": "14.2.12",
     "react": "^18",
     "react-dom": "^18",
-    "redux-toolkit": "^1.1.2"
+    "react-i18next": "^15.4.0",
+    "react-redux": "^9.2.0",
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
+    "@types/i18next": "^12.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

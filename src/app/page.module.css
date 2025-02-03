@@ -6,14 +6,16 @@
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
+  /* display: grid; */
+  /* grid-template-rows: 20px 1fr 20px; */
+  /* align-items: center; */
+  /* justify-items: center; */
   min-height: 100svh;
-  padding: 80px;
+  padding: 20px;
   gap: 64px;
   font-family: var(--font-geist-sans);
+  background: linear-gradient(to right, #6EDA78, #FFA200);
+  /* width: 100%; */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,8 +26,10 @@
 
     --button-primary-hover: #ccc;
     --button-secondary-hover: #1a1a1a;
+
   }
 }
+
 
 .main {
   display: flex;
@@ -87,6 +91,200 @@ a.primary {
 a.secondary {
   border-color: var(--gray-alpha-200);
   min-width: 180px;
+}
+
+.customCard {
+  width: 300px;
+  border-radius: 0px;
+}
+.square {
+  height: 100px;
+  width: 100px;
+  background-color: #7B7B7B;
+}
+
+.square:hover {
+  background-color: #fff;
+}
+.square:active {
+  background-color: #fff;
+}
+
+.circle {
+  height: 100px;
+  width: 100px;
+  background-color: #7B7B7B;
+  border-radius: 50%;
+}
+
+.circle:hover {
+  background-color: #fff;
+}
+.circle:active {
+  background-color: #fff;
+}
+
+.oval {
+  height: 100px;
+  width: 170px;
+  background-color: #7B7B7B;
+  border-radius: 50%;
+}
+
+.oval:hover {
+  background-color: #fff;
+}
+.oval:active {
+  background-color: #fff;
+}
+
+.trapezoid {
+  border-bottom: 100px solid #7B7B7B;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 100px;
+  width: 175px;
+}
+
+.trapezoid:hover {
+  border-bottom: 100px solid #fff;
+}
+.trapezoid:active {
+  border-bottom: 100px solid #fff;
+}
+
+.parallelogram {
+  width: 150px;
+  height: 100px;
+  transform: skew(20deg);
+  background: #7B7B7B;
+}
+
+.parallelogram:hover {
+  background-color: #fff;
+}
+.parallelogram:active {
+  background-color: #fff;
+}
+
+.rectangle {
+  height: 100px;
+  width: 175px;
+  background-color: #7B7B7B;
+}
+
+.rectangle:hover {
+  background-color: #fff;
+}
+.rectangle:active {
+  background-color: #fff;
+}
+
+.triangleContainer {
+}
+
+.triangleUp,
+.triangleDown,
+.triangleLeft,
+.triangleRight {
+  width: 0;
+  height: 0;
+  /* border-style: solid; */
+}
+
+.triangleUp {
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid #7B7B7B;
+  cursor: pointer;
+}
+
+.triangleDown {
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid #7B7B7B;
+  cursor: pointer;
+}
+
+.triangleLeft {
+  border-top: 50px solid transparent;
+  border-right: 100px solid #7B7B7B;
+  border-bottom: 50px solid transparent;
+  cursor: pointer;
+}
+
+.triangleRight {
+  border-top: 50px solid transparent;
+  border-left: 100px solid #7B7B7B;
+  border-bottom: 50px solid transparent;
+  cursor: pointer;
+}
+
+.cardShape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardShape:hover {
+  /* transform: scale(1.1); */
+  background-color:  #FFA200;
+}
+
+.cardShape:active {
+  transform: scale(0.9);
+  background-color:  #6EDA78;
+}
+
+.layout-style-page {
+  margin: 30px;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnName {
+ background-color: #6EDA78;
+ color: #fff;
+ border-radius: 10px;
+ width: 120px;
+ height: 30px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.btnHome{
+  background-color: #fff;
+  color: #000;
+  border-radius: 5px;
+  width: 80px;
+}
+ .btnHome:hover{
+  background-color: #fff !important;
+  color: #000 ! important;
+  border: 1px solid #fff ! important;
+}
+ .btnHome:active{
+  background-color: #fff !important;
+  color: #000 ! important;
+  border: 1px solid #fff ! important;
+}
+
+.formContainer {
+  border: 1px solid black; 
+  border-radius: 5px;
+  padding: 10px; 
+}
+
+.fullWidth {
+  width: 100%;
 }
 
 .footer {

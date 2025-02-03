@@ -1,0 +1,30 @@
+{
+  "home": "หน้าหลัก",
+  "test_1": "แบบทดสอบที่ 1",
+  "test_2": "แบบทดสอบที่ 2",
+  "layout_style": "การจัดการหน้าเว็บ",
+  "form_table": "การจัดการหน้าฟอร์ม",
+  "language_en": "อังกฤษ",
+  "language_th": "ไทย",
+  "move_shape": "เลื่อนรูปภาพ",
+  "move_position": "เปลี่ยนตําแหน่ง",
+  "form": {
+    "title": "คำนำหน้า",
+    "first_name": "ชื่อจริง",
+    "last_name": "นามสกุล",
+    "birth_day": "วันเกิด",
+    "nationality": "สัญชาติ",
+    "citizen": "เลขบัตรประชาชน",
+    "gender": "เพศ",
+    "male": "ผู้ชาย",
+    "female": "ผู้หญิง",
+    "unsex": "ไม่ระบุ",
+    "mobile_phone": "หมายเลขโทรศัพท์มือถือ",
+    "passport_no": "หนังสือเดินทาง",
+    "expected_salary":"เงินเดือนที่คาดหวัง"
+  },
+  "button": {
+    "submit": "ส่ง",
+    "reset": "ล้างข้อมูล"
+  }
+}

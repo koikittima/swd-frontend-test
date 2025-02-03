@@ -1,0 +1,30 @@
+{
+  "home": "Home",
+  "test_1": "Test 1",
+  "test_2": "Test 2",
+  "layout_style": "Layout & Style",
+  "form_table": "Form & Table",
+  "language_en": "EN",
+  "language_th": "TH",
+  "move_shape": "Move Shape",
+  "move_position": "Move Position",
+  "form": {
+    "title": "Title",
+    "first_name": "Firstname",
+    "last_name": "Lastname",
+    "birth_day": "Birthday",
+    "nationality": "Nationality",
+    "citizen": "CitizenID",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "unsex": "Unsex",
+    "mobile_phone": "Mobile Phone",
+    "passport_no": "Passport No",
+    "expected_salary":"Expected Salary"
+  },
+  "button": {
+    "submit": "Submit",
+    "reset": "Reset"
+  }
+}
