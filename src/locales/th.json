@@ -24,7 +24,7 @@
     "expected_salary":"เงินเดือนที่คาดหวัง"
   },
   "button": {
-    "submit": "ส่ง",
+    "submit": "ส่งข้อมูล",
     "reset": "ล้างข้อมูล"
   },
   "phone": {

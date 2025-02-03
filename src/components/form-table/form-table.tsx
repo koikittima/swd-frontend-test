@@ -16,10 +16,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store";
 import { setFormData } from "@/features/form/form-slice";
-import {
-  addEntry,
-  updateEntry,
-} from "@/features/table/table-slice";
+import { addEntry, updateEntry } from "@/features/table/table-slice";
 import styles from "@/app/page.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { Dayjs } from "dayjs";
@@ -100,12 +97,12 @@ const FormTableComponent = () => {
     const updatedCitizen = newCitizen.join("");
 
     form.setFieldsValue({ citizen: updatedCitizen });
-    
+
     dispatch(setFormData({ citizen: updatedCitizen }));
   };
 
   const handleSubmit = async (values: FormValues) => {
-    const entry = { ...values, id: values.id || formData.id || uuidv4()};
+    const entry = { ...values, id: values.id || formData.id || uuidv4() };
 
     const currentTableData = Array.isArray(tableData) ? tableData : [];
 
@@ -136,7 +133,6 @@ const FormTableComponent = () => {
     dispatch(setFormData(initialFormState));
     form.resetFields();
   };
-
 
   return (
     <div style={{ marginBottom: "30px" }}>
@@ -253,7 +249,7 @@ const FormTableComponent = () => {
                   value={formData.citizen.slice(12, 13)}
                   onChange={(e) => handleCitizenChange(e.target.value, 4)}
                 />
-              </Input.Group >
+              </Input.Group>
             </Form.Item>
           </Col>
           <Col span={12} />
@@ -278,7 +274,7 @@ const FormTableComponent = () => {
 
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item label={t("form.mobile_phone")}>
+            <Form.Item label={t("form.mobile_phone")} labelCol={{ span: 5 }}>
               <Space.Compact>
                 <Form.Item
                   name={["mobile_phone", "country_code"]}
@@ -310,7 +306,16 @@ const FormTableComponent = () => {
         </Row>
 
         <Row gutter={24}>
-          <Col span={6}>
+          <Col span={10}>
+            <Form.Item label={t("form.passport_no")} name="passport_no">
+              <Input />
+            </Form.Item>
+            <Col span={14}></Col>
+          </Col>
+        </Row>
+
+        <Row gutter={24}>
+          <Col span={10}>
             <Form.Item
               label={t("form.expected_salary")}
               name="expected_salary"
@@ -319,15 +324,8 @@ const FormTableComponent = () => {
               <Input type="number" />
             </Form.Item>
           </Col>
-          <Col span={6}></Col>
-          <Col
-            span={6}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Col span={8}></Col>
+          <Col span={3}>
             <Button
               className={styles.btnHome}
               htmlType="reset"
@@ -336,14 +334,7 @@ const FormTableComponent = () => {
               {t("button.reset").toUpperCase()}
             </Button>
           </Col>
-          <Col
-            span={6}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Col span={3}>
             <Button className={styles.btnHome} htmlType="submit">
               {t("button.submit").toUpperCase()}
             </Button>
