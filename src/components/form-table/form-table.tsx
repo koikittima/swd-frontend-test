@@ -274,7 +274,7 @@ const FormTableComponent = () => {
 
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item label={t("form.mobile_phone")} labelCol={{ span: 5 }}>
+            <Form.Item label={t("form.mobile_phone")} >
               <Space.Compact>
                 <Form.Item
                   name={["mobile_phone", "country_code"]}
