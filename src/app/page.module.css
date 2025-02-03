@@ -277,6 +277,11 @@ a.secondary {
   border: 1px solid #fff ! important;
 }
 
+.btnHome:disabled{
+  background-color: #fff !important;
+  color: #d5d3d3;
+}
+
 .formContainer {
   border: 1px solid black; 
   border-radius: 5px;
@@ -286,6 +291,8 @@ a.secondary {
 .fullWidth {
   width: 100%;
 }
+
+
 
 .footer {
   grid-row-start: 3;

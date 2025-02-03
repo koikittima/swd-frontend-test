@@ -26,5 +26,48 @@
   "button": {
     "submit": "Submit",
     "reset": "Reset"
+  },
+  "phone": {
+    "thai": "TH +66",
+    "usa": "US +1"
+  },
+  "nationality": {
+    "thai": "Thai",
+    "american": "American",
+    "japanese": "Japanese",
+    "french": "French"
+  },
+  "title": {
+    "mr": "Mr.",
+    "mrs": "Mrs.",
+    "ms": "Ms."
+  },
+  "table": {
+    "name": "Name",
+    "gender": "Gender",
+    "phone": "Mobile Phone",
+    "nationality": "Nationality",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "addEntry": "Add Entry",
+    "deleteSelected": "Delete",
+    "editEntry": "Edit Entry",
+    "addNewEntry": "Add Entry",
+    "confirmDelete": "Are you sure you want to delete?",
+    "manage":"manage",
+    "previous": "Previous",
+    "next": "Next",
+    "selectAll": "Select All"
+  },
+  "genders": {
+    "male": "Male",
+    "female": "Female",
+    "unsex": "Unsex"
+  },
+  "alert": {
+    "saveSuccess": "Save Success",
+    "deleteSuccess": "Delete Success",
+    "updateSuccess": "Update Success"
   }
 }

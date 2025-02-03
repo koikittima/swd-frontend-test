@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Form,
   Input,
@@ -15,14 +16,22 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store";
 import { setFormData } from "@/features/form/form-slice";
+import {
+  addEntry,
+  updateEntry,
+} from "@/features/table/table-slice";
 import styles from "@/app/page.module.css";
+import { v4 as uuidv4 } from "uuid";
+import { Dayjs } from "dayjs";
+
 const { Option } = Select;
 
 interface FormValues {
+  id: string;
   title: string;
   first_name: string;
   last_name: string;
-  birth_day: string | null;
+  birth_day: Dayjs | null;
   nationality: string;
   citizen: string;
   gender: string;
@@ -34,36 +43,50 @@ interface FormValues {
   expected_salary: number | "";
 }
 
-const titleOptions = [
-  { value: "mr", label: "Mr." },
-  { value: "mrs", label: "Mrs." },
-  { value: "ms", label: "Ms." },
-];
-
-const nationalityOptions = [
-  { value: "thai", label: "Thai" },
-  { value: "american", label: "American" },
-  { value: "japanese", label: "Japanese" },
-  { value: "french", label: "French" },
-];
-
-const phoneOptions = [
-  { value: "66", label: "🇹🇭 +66" },
-  { value: "1", label: "🇺🇸 +1" },
-  { value: "81", label: "🇯🇵 +81" },
-  { value: "33", label: "🇫🇷 +33" },
-];
+const initialFormState: FormValues = {
+  id: "",
+  title: "",
+  first_name: "",
+  last_name: "",
+  birth_day: null,
+  nationality: "",
+  citizen: "",
+  gender: "",
+  mobile_phone: { country_code: "", number: "" },
+  passport_no: "",
+  expected_salary: "",
+};
 
 const FormTableComponent = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const formData = useSelector((state: RootState) => state.form);
+  const tableData = useSelector((state: RootState) => state.table);
   const [form] = Form.useForm();
 
-  const handleValuesChange = (
-    changedValues: Partial<FormValues>,
-    allValues: FormValues
-  ) => {
+  const phoneOptions = [
+    { value: "66", label: t("phone.thai") },
+    { value: "1", label: t("phone.usa") },
+  ];
+
+  const nationalityOptions = [
+    { value: "thai", label: t("nationality.thai") },
+    { value: "american", label: t("nationality.american") },
+    { value: "japanese", label: t("nationality.japanese") },
+    { value: "french", label: t("nationality.french") },
+  ];
+
+  const titleOptions = [
+    { value: "mr", label: t("title.mr") },
+    { value: "mrs", label: t("title.mrs") },
+    { value: "ms", label: t("title.ms") },
+  ];
+
+  useEffect(() => {
+    form.setFieldsValue(formData);
+  }, [formData, form]);
+
+  const handleValuesChange = (allValues: FormValues) => {
     dispatch(setFormData(allValues));
   };
 
@@ -77,8 +100,43 @@ const FormTableComponent = () => {
     const updatedCitizen = newCitizen.join("");
 
     form.setFieldsValue({ citizen: updatedCitizen });
+    
     dispatch(setFormData({ citizen: updatedCitizen }));
   };
+
+  const handleSubmit = async (values: FormValues) => {
+    const entry = { ...values, id: values.id || formData.id || uuidv4()};
+
+    const currentTableData = Array.isArray(tableData) ? tableData : [];
+
+    const isExistingEntry = currentTableData?.some(
+      (item) => item?.id === entry?.id
+    );
+
+    const updatedTableData = isExistingEntry
+      ? currentTableData?.map((item) => (item?.id === entry?.id ? entry : item))
+      : [...currentTableData, entry];
+
+    localStorage.setItem("tableData", JSON.stringify(updatedTableData));
+
+    if (isExistingEntry) {
+      alert(t("alert.updateSuccess"));
+      dispatch(updateEntry(entry));
+    } else {
+      alert(t("alert.saveSuccess"));
+      dispatch(addEntry(entry));
+    }
+    setTimeout(() => {
+      dispatch(setFormData(initialFormState));
+      form.resetFields();
+    }, 0);
+  };
+
+  const handleReset = () => {
+    dispatch(setFormData(initialFormState));
+    form.resetFields();
+  };
+
 
   return (
     <div style={{ marginBottom: "30px" }}>
@@ -91,8 +149,8 @@ const FormTableComponent = () => {
         labelAlign="left"
         initialValues={formData}
         onValuesChange={handleValuesChange}
+        onFinish={handleSubmit}
       >
-        {/* Row 1: Title, First Name, Last Name */}
         <Row gutter={24}>
           <Col span={6}>
             <Form.Item
@@ -101,7 +159,7 @@ const FormTableComponent = () => {
               rules={[{ required: true, message: t("form.required") }]}
             >
               <Select>
-                {titleOptions.map((option) => (
+                {titleOptions?.map((option) => (
                   <Option key={option.value} value={option.value}>
                     {option.label}
                   </Option>
@@ -129,7 +187,6 @@ const FormTableComponent = () => {
           </Col>
         </Row>
 
-        {/* Row 2: Birth Date & Nationality */}
         <Row gutter={24}>
           <Col span={6}>
             <Form.Item
@@ -147,7 +204,7 @@ const FormTableComponent = () => {
               rules={[{ required: true, message: t("form.required") }]}
             >
               <Select>
-                {nationalityOptions.map((option) => (
+                {nationalityOptions?.map((option) => (
                   <Option key={option.value} value={option.value}>
                     {option.label}
                   </Option>
@@ -158,11 +215,10 @@ const FormTableComponent = () => {
           <Col span={9} />
         </Row>
 
-        {/* Row 3: Citizen ID (Label & Input อยู่แถวเดียวกัน) */}
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item label={t("form.citizen")} name="citizen">
-              <Input.Group>
+              <Input.Group compact>
                 <Input
                   style={{ width: 50 }}
                   maxLength={1}
@@ -197,13 +253,12 @@ const FormTableComponent = () => {
                   value={formData.citizen.slice(12, 13)}
                   onChange={(e) => handleCitizenChange(e.target.value, 4)}
                 />
-              </Input.Group>
+              </Input.Group >
             </Form.Item>
           </Col>
           <Col span={12} />
         </Row>
 
-        {/* Row 4: Gender */}
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item
@@ -221,33 +276,41 @@ const FormTableComponent = () => {
           <Col span={12} />
         </Row>
 
-        {/* Row 5: Mobile Phone */}
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item
-              label={t("form.mobile_phone")}
-              name="mobile_phone"
-              rules={[{ required: true, message: t("form.required") }]}
-            >
+            <Form.Item label={t("form.mobile_phone")}>
               <Space.Compact>
-                <Select style={{ width: 150 }}>
-                  {phoneOptions.map((option) => (
-                    <Option key={option.value} value={option.value}>
-                      {option.label}
-                    </Option>
-                  ))}
-                </Select>
+                <Form.Item
+                  name={["mobile_phone", "country_code"]}
+                  noStyle
+                  rules={[{ required: true, message: t("form.required") }]}
+                >
+                  <Select style={{ width: 150 }}>
+                    {phoneOptions.map((option) => (
+                      <Option key={option.value} value={option.value}>
+                        {option.label}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+
                 <span style={{ margin: "0 8px" }}>-</span>
-                <Input style={{ width: 150 }} maxLength={10} />
+
+                <Form.Item
+                  name={["mobile_phone", "number"]}
+                  noStyle
+                  rules={[{ required: true, message: t("form.required") }]}
+                >
+                  <Input style={{ width: 150 }} maxLength={10} />
+                </Form.Item>
               </Space.Compact>
             </Form.Item>
           </Col>
           <Col span={12} />
         </Row>
 
-        {/* Row 6: Expected Salary */}
         <Row gutter={24}>
-          <Col span={10}>
+          <Col span={6}>
             <Form.Item
               label={t("form.expected_salary")}
               name="expected_salary"
@@ -256,14 +319,33 @@ const FormTableComponent = () => {
               <Input type="number" />
             </Form.Item>
           </Col>
-          <Col span={14} />
-        </Row>
-
-        {/* Row 7: Submit Button */}
-        <Row>
-          <Col span={24} style={{ textAlign: "center" }}>
-            <Button type="primary" htmlType="submit">
-              {t("button.submit")}
+          <Col span={6}></Col>
+          <Col
+            span={6}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              className={styles.btnHome}
+              htmlType="reset"
+              onClick={() => handleReset()}
+            >
+              {t("button.reset").toUpperCase()}
+            </Button>
+          </Col>
+          <Col
+            span={6}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button className={styles.btnHome} htmlType="submit">
+              {t("button.submit").toUpperCase()}
             </Button>
           </Col>
         </Row>

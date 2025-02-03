@@ -1,28 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Dayjs } from "dayjs";
 
 interface FormState {
+  id: string;
   title: string;
   first_name: string;
   last_name: string;
-  birth_day: string | null; 
+  birth_day: Dayjs | null;
   nationality: string;
-  citizen: string; 
+  citizen: string;
   gender: string;
   mobile_phone: {
     country_code: string;
     number: string;
-  }; 
+  };
   passport_no: string;
   expected_salary: number | "";
 }
 
 const initialState: FormState = {
+  id: "",
   title: "",
   first_name: "",
   last_name: "",
   birth_day: null,
   nationality: "",
-  citizen: "", 
+  citizen: "",
   gender: "",
   mobile_phone: {
     country_code: "",
@@ -39,8 +42,9 @@ const formSlice = createSlice({
     setFormData: (state, action: PayloadAction<Partial<FormState>>) => {
       return { ...state, ...action.payload };
     },
+    resetForm: () => initialState,
   },
 });
 
-export const { setFormData } = formSlice.actions;
+export const { setFormData, resetForm } = formSlice.actions;
 export default formSlice.reducer;

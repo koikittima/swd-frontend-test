@@ -26,5 +26,48 @@
   "button": {
     "submit": "ส่ง",
     "reset": "ล้างข้อมูล"
+  },
+  "phone": {
+    "thai": "ไทย (+66)",
+    "usa": "สหรัฐอเมริกา (+1)"
+  },
+  "nationality": {
+    "thai": "ไทย",
+    "american": "อเมริกัน",
+    "japanese": "ญี่ปุ่น",
+    "french": "ฝรั่งเศส"
+  },
+  "title": {
+    "mr": "นาย",
+    "mrs": "นาง",
+    "ms": "นางสาว"
+  },
+  "table": {
+    "name": "ชื่อ",
+    "gender": "เพศ",
+    "phone": "หมายเลขโทรศัพท์มือถือ",
+    "nationality": "สัญชาติ",
+    "actions": "การกระทำ",
+    "edit": "แก้ไข",
+    "delete": "ลบ",
+    "addEntry": "เพิ่มข้อมูล",
+    "deleteSelected": "ลบข้อมูล",
+    "editEntry": "แก้ไขข้อมูล",
+    "addNewEntry": "เพิ่มข้อมูล",
+    "confirmDelete": "คุณแน่ใจหรือไม่ว่าต้องการลบ?",
+     "manage": "จัดการ",
+     "previous": "ก่อนหน้า",
+     "next": "ถัดไป",
+     "selectAll": "เลือกทั้งหมด"
+  },
+  "genders": {
+    "male": "ผู้ชาย",
+    "female": "ผู้หญิง",
+    "unsex": "ไม่ระบุ"
+  },
+  "alert": {
+    "saveSuccess": "บันทึกสําเร็จ",
+    "deleteSuccess": "ลบสําเร็จ",
+    "updateSuccess": "อัปเดตสําเร็จ"
   }
 }
