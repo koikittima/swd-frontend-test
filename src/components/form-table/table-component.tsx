@@ -89,13 +89,13 @@ const TableComponent: React.FC = () => {
         <div style={{ display: "flex" }}>
           <Typography
             onClick={() => openEdit(record)}
-            style={{ marginRight: 8, cursor: "pointer" }}
+            style={{cursor: "pointer" }}
           >
             {t("table.edit").toUpperCase()}
           </Typography>
           <Typography
             onClick={() => handleDelete(record.id)}
-            style={{ cursor: "pointer" }}
+            style={{ marginLeft: 20,  cursor: "pointer" }}
           >
             {t("table.delete").toUpperCase()}
           </Typography>
