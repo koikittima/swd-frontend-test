@@ -60,7 +60,10 @@ const FormTableComponent = () => {
   const formData = useSelector((state: RootState) => state.form);
   const [form] = Form.useForm();
 
-  const handleValuesChange = (changedValues: Partial<FormValues>, allValues: FormValues) => {
+  const handleValuesChange = (
+    changedValues: Partial<FormValues>,
+    allValues: FormValues
+  ) => {
     dispatch(setFormData(allValues));
   };
 
@@ -71,7 +74,7 @@ const FormTableComponent = () => {
     const startIdx = segmentLengths.slice(0, index).reduce((a, b) => a + b, 0);
     newCitizen.splice(startIdx, segmentLengths[index], ...value.split(""));
 
-  const updatedCitizen = newCitizen.join("");
+    const updatedCitizen = newCitizen.join("");
 
     form.setFieldsValue({ citizen: updatedCitizen });
     dispatch(setFormData({ citizen: updatedCitizen }));
